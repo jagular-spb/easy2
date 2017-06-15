@@ -1,0 +1,12 @@
+#!/bin/bash
+re='^[0-9]+$'
+
+if [ -z "$1" ] || [ -z "$2" ] || ! [[ $2 =~ $re ]] ; then
+   printf " Generate key with provided certificate common name,\n with password\n and with custom expiration date\n\n Usage: $0 <cert_common_name> <days_to_expire> (for example: $0 test.navigat.ru 30)\n"
+   exit 1
+ fi
+
+source ./vars
+export KEY_EXPIRE=$2
+export EASY_RSA="${EASY_RSA:-.}"
+"$EASY_RSA/pkitool" --interact --pass $1

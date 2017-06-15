@@ -1,0 +1,6 @@
+#!/bin/bash
+[ -z "$1" ] && printf " Generate key with provided certificate common name\n and password\n\n Usage: $0 <cert_common_name> (for example: $0 test.navigat.ru)\n" && exit
+source ./vars
+export KEY_EXPIRE=365
+export EASY_RSA="${EASY_RSA:-.}"
+"$EASY_RSA/pkitool" --interact --pass $*

@@ -1,0 +1,9 @@
+#!/bin/bash
+#!/bin/bash
+[ -z "$1" ] && printf " Show key expiration date\n\n Usage: $0 <cert_common_name> (for example: $0 test.navigat.ru)\n" && exit
+source ./vars
+export EASY_RSA="${EASY_RSA:-.}"
+cd "$EASY_RSA/keys"
+printf "\n\n            ------------------------------------\n"
+openssl x509 -noout -text -in $1.crt | grep " Not After :"
+printf "            ------------------------------------\n\n"
